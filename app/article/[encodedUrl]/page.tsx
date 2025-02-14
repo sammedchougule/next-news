@@ -28,7 +28,7 @@ export default function ArticlePage({
     return (
       <main className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-4">Error loading article</h1>
-        <p>We're sorry, but we couldn't load the article you're looking for.</p>
+        <p>We&apos;re sorry, but we couldn&apos;t load the article you&apos;re looking for.</p>
         <Link href="/" className="text-blue-500 hover:underline mt-4 inline-block">
           Return to homepage
         </Link>

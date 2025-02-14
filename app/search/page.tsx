@@ -40,7 +40,7 @@ export default async function SearchResults({
 
   return (
     <main className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8">Search Results for "{query}"</h1>
+      <h1 className="text-4xl font-bold mb-8">Search Results for &quot;{query}&quot;</h1>
       <SearchBar />
       <Suspense fallback={<div className="text-center mt-8">Loading...</div>}>
         <ErrorBoundary fallback={<div>Error loading search results. Please try again later.</div>}>
