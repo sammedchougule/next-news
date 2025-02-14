@@ -1,6 +1,23 @@
 const API_KEY = process.env.NEXT_PUBLIC_NEWS_API_KEY
 const BASE_URL = "https://newsapi.org/v2"
 
+interface NewsArticle {
+  source: { id: string | null; name: string }
+  author: string | null
+  title: string
+  description: string | null
+  url: string
+  urlToImage: string | null
+  publishedAt: string
+  content: string | null
+}
+
+interface NewsApiResponse {
+  articles: NewsArticle[]
+  totalResults: number
+}
+
+
 export async function getTopHeadlines(category?: string, page = 1) {
   let url = `${BASE_URL}/top-headlines?country=us&page=${page}&pageSize=10&apiKey=${API_KEY}`
 
