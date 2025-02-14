@@ -18,7 +18,7 @@ interface NewsApiResponse {
 }
 
 
-export async function getTopHeadlines(category?: string, page = 1) {
+export async function getTopHeadlines(category?: string, page = 1): Promise<NewsApiResponse> {
   let url = `${BASE_URL}/top-headlines?country=us&page=${page}&pageSize=10&apiKey=${API_KEY}`
 
   if (category && category !== "general") {
@@ -29,28 +29,22 @@ export async function getTopHeadlines(category?: string, page = 1) {
   if (!response.ok) {
     throw new Error("Failed to fetch news")
   }
-  const data = await response.json()
-  return {
-    articles: data.articles,
-    totalResults: data.totalResults,
-  }
+  const data: NewsApiResponse = await response.json()
+  return data
 }
 
-export async function searchNews(query: string, page = 1) {
+export async function searchNews(query: string, page = 1): Promise<NewsApiResponse> {
   const url = `${BASE_URL}/everything?q=${query}&page=${page}&pageSize=10&apiKey=${API_KEY}`
 
   const response = await fetch(url)
   if (!response.ok) {
     throw new Error("Failed to fetch news")
   }
-  const data = await response.json()
-  return {
-    articles: data.articles,
-    totalResults: data.totalResults,
-  }
+  const data: NewsApiResponse = await response.json()
+  return data
 }
 
-export async function getArticleByUrl(encodedTitle: string) {
+export async function getArticleByUrl(encodedTitle: string): Promise<NewsArticle | null> {
   const title = decodeURIComponent(encodedTitle)
   const apiUrl = `${BASE_URL}/everything?q=${encodeURIComponent(title)}&apiKey=${API_KEY}`
 
@@ -61,14 +55,15 @@ export async function getArticleByUrl(encodedTitle: string) {
     if (!response.ok) {
       throw new Error(`API response not OK: ${response.status} ${response.statusText}`)
     }
-    const data = await response.json()
+    const data: NewsApiResponse = await response.json()
 
     console.log("API response:", data)
 
-    if (data.articles && data.articles.length > 0) {
+    if (data.articles.length > 0) {
       // Find the article that best matches the title
       const article =
-        data.articles.find((a: any) => a.title.toLowerCase().includes(title.toLowerCase())) || data.articles[0]
+        data.articles.find((a: NewsArticle) => a.title.toLowerCase().includes(title.toLowerCase())) ||
+        data.articles[0]
       return article
     } else {
       throw new Error("No articles found in API response")
@@ -78,4 +73,3 @@ export async function getArticleByUrl(encodedTitle: string) {
     throw error
   }
 }
-
