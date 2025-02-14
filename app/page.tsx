@@ -1,7 +1,7 @@
 import { Suspense } from "react"
-import NewsGrid from "./components/NewsGrid"
-import CategorySelector from "./components/CategorySelector"
-import SearchBar from "./components/SearchBar"
+import NewsGrid from "../components/NewsGrid"
+import CategorySelector from "../components/CategorySelector"
+import SearchBar from "../components/SearchBar"
 
 export default function Home({
   searchParams,

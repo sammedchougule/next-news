@@ -1,8 +1,8 @@
 import { Suspense } from "react"
-import NewsCard from "../components/NewsCard"
-import SearchBar from "../components/SearchBar"
-import Pagination from "../components/Pagination"
-import ErrorBoundary from "../components/ErrorBoundary"
+import NewsCard from "../../components/NewsCard"
+import SearchBar from "../../components/SearchBar"
+import Pagination from "../../components/Pagination"
+import ErrorBoundary from "../../components/ErrorBoundary"
 
 interface Article {
   title: string
